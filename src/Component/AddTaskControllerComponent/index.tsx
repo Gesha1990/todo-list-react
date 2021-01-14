@@ -7,13 +7,15 @@ interface TaskItem {
     active: boolean;
     done: boolean;
   }
-interface AddTaskController{
+
+  // Should i do interface for the functionality component
+interface AddTaskControllerProps{
     taskInputValue: string,
     setTaskInputValue: ()=>{},
     taskItemArr: TaskItem[],
     addTaskItemToArr: ()=>{}
 }
-const AddTaskControllerComponent: React.FC<any> = (props: any) => {
+const AddTaskControllerComponent: React.FC<AddTaskControllerProps> = (props) => {
   
     const {taskInputValue, setTaskInputValue, taskItemArr, addTaskItemToArr} = props;
 
