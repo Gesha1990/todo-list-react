@@ -15,7 +15,7 @@ interface TodoListComponentProps{
   taskItemArr: TaskItem[],
   addTaskItemToArr: Function
 }
-const  TodoListComponent: React.FC<TodoListComponentProps> = (props: any) => {
+const  TodoListComponent: React.FC<TodoListComponentProps> = (props) => {
 
     const {searchInputValue, taskItemArr, addTaskItemToArr, activeSearchBtn} = props;
     // Function to filter tasks by mode and search word
