@@ -3,14 +3,20 @@ import classNames from "classnames/bind";
 //Style
 import "./style.scss";
 import trash from "../../assets/icons/trash.svg";
+interface TaskItem {
+  id: number;
+  taskValue: string;
+  active: boolean;
+  done: boolean;
+}
+interface TodoListComponentProps{
+  searchInputValue: string,
+  activeSearchBtn: string,
+  taskItemArr: TaskItem[],
+  addTaskItemToArr: Function
+}
+const  TodoListComponent: React.FC<TodoListComponentProps> = (props: any) => {
 
-function TodoListComponent(props: any) {
-  interface TaskItem {
-    id: number;
-    taskValue: string;
-    active: boolean;
-    done: boolean;
-  }
     const {searchInputValue, taskItemArr, addTaskItemToArr, activeSearchBtn} = props;
     // Function to filter tasks by mode and search word
   const filteredArrByMode = (arr: TaskItem[] = []) => {
