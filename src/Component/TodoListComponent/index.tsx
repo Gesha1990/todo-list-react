@@ -1,8 +1,9 @@
-import React from "react";
+import React, {Component} from "react";
 import classNames from "classnames/bind";
 //Style
 import "./style.scss";
 import trash from "../../assets/icons/trash.svg";
+import { render } from "@testing-library/react";
 interface TaskItem {
   id: number;
   taskValue: string;
@@ -15,30 +16,35 @@ interface TodoListComponentProps{
   taskItemArr: TaskItem[],
   addTaskItemToArr: Function
 }
-const  TodoListComponent: React.FC<TodoListComponentProps> = (props) => {
-
-    const {searchInputValue, taskItemArr, addTaskItemToArr, activeSearchBtn} = props;
+// React.FC<TodoListComponentProps> 
+export  class  TodoListComponent extends Component<TodoListComponentProps>{
+  
     // Function to filter tasks by mode and search word
-  const filteredArrByMode = (arr: TaskItem[] = []) => {
+    private _filteredArrByMode (arr: TaskItem[] = [],activeSearchBtn: string, searchInputValue: string ) {
+     
     switch (activeSearchBtn) {
       case "done":
         return arr.filter((task: TaskItem) => task.done).filter((task: TaskItem) =>{
-           return task.taskValue.indexOf(searchInputValue)!==-1
+           return task.taskValue.toLowerCase().indexOf(searchInputValue.toLowerCase())!==-1
         });
       case "active":
         return arr.filter((task: TaskItem) => task.active).filter((task: TaskItem) =>{
-          return task.taskValue.indexOf(searchInputValue)!==-1
+          return task.taskValue.toLowerCase().indexOf(searchInputValue.toLowerCase())!==-1
        });;
       default:
         return arr.filter((task: TaskItem) =>{
-          return task.taskValue.indexOf(searchInputValue)!==-1
+          return task.taskValue.toLowerCase().indexOf(searchInputValue.toLowerCase())!==-1
        });;
     }
   };
-  return (
+ render() {
+  const { searchInputValue, taskItemArr, addTaskItemToArr, activeSearchBtn} = this.props
+
+    
+ return (
     <div className="todo-list">
     {/* before we show a tasks we should filter depends on what mode is now  */}
-    {filteredArrByMode(taskItemArr).map((taskItem) => {
+    {this._filteredArrByMode(taskItemArr,activeSearchBtn, searchInputValue).map((taskItem) => {
       return (
         <div
           className={classNames("todo-list__item", {
@@ -100,6 +106,5 @@ const  TodoListComponent: React.FC<TodoListComponentProps> = (props) => {
     })}
   </div>
   );
+ }
 }
-
-export default TodoListComponent;

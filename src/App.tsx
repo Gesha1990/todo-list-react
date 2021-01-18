@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames/bind";
 //Components
 import SearchComponent from "./Component/SearchComponent/index";
-import TodoListComponent from "./Component/TodoListComponent/index";
+import {TodoListComponent} from "./Component/TodoListComponent/index";
 import AddTaskControllerComponent from "./Component/AddTaskControllerComponent/index";
 //Style
 import "./App.scss";
